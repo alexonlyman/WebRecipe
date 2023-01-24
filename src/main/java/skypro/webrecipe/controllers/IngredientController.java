@@ -11,7 +11,7 @@ import skypro.webrecipe.services.IngredientService;
 @RequiredArgsConstructor
 public class IngredientController {
     private final IngredientService ingredientService;
-@GetMapping("/id")
+@GetMapping("{id}")
     Ingredient getIngredietn(@PathVariable Integer id) {
     return ingredientService.getIngredietn(id);
     }
