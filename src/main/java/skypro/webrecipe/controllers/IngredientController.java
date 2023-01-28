@@ -1,5 +1,8 @@
 package skypro.webrecipe.controllers;
-import jakarta.validation.Valid;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,10 +13,15 @@ import skypro.webrecipe.services.IngredientService;
 @RestController
 @RequestMapping("/ingredient")
 @RequiredArgsConstructor
+@Tag(name = "Ингредиенты", description = "CRUD операции для работы с ингредиентами")
 public class IngredientController {
     private final IngredientService ingredientService;
 
     @GetMapping("/{id}")
+    @Operation(
+            description = "Поиск ингридиента по ID"
+    )
+    @Parameters(value = {@Parameter(name = "ID", example = "1")})
     public ResponseEntity<Ingredient> getIngredietn(@PathVariable Integer id) {
         Ingredient ingredietn = ingredientService.getIngredietn(id);
         if (ingredietn == null) {
@@ -29,7 +37,7 @@ public class IngredientController {
     }
 
     @PostMapping
-    public ResponseEntity<Ingredient> addIngredietn(@Valid @RequestBody Ingredient ingredient) {
+    public ResponseEntity<Ingredient> addIngredietn( @RequestBody Ingredient ingredient) {
 
         Ingredient ingredietn = ingredientService.addIngredient(ingredient);
         return ResponseEntity.ok().body(ingredient);
