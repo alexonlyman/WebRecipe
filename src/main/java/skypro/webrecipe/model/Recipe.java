@@ -16,7 +16,7 @@ public class Recipe {
     @Positive
     private Integer cookingTime;
     @NotEmpty
-    private List<Ingredient> ingridients;
+    private List<Ingredient> ingredients;
     @NotEmpty
     private List<String> steps;
 

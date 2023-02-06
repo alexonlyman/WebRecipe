@@ -10,6 +10,7 @@ import skypro.webrecipe.model.Recipe;
 import skypro.webrecipe.services.FileSirvice;
 import skypro.webrecipe.services.RecipeServise;
 
+import javax.annotation.PostConstruct;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,6 +21,11 @@ public class RecipeServiseImpl implements RecipeServise {
     private final FileSirvice fileSirvice;
     private Map<Integer, Recipe> recipeMap = new HashMap<>();
     private static Integer id = 0;
+
+//    @PostConstruct
+//    private void init() {
+//        readFromFile();
+//    }
 
     @Override
     public Recipe addRecipe(Recipe recipe) {

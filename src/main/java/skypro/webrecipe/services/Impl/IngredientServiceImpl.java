@@ -20,6 +20,7 @@ public class IngredientServiceImpl implements IngredientService {
     private Map<Integer, Ingredient> ingredientMap = new HashMap<>();
     private static Integer id = 0;
 
+
     @Override
     public Ingredient addIngredient(Ingredient ingredient) {
         saveToFile();
@@ -62,7 +63,7 @@ public class IngredientServiceImpl implements IngredientService {
     private void saveToFile() {
         try {
           String json = new ObjectMapper().writeValueAsString(ingredientMap);
-            fileSirvice.saveToFile(json);
+          fileSirvice.saveToFile(json);
         } catch (JsonProcessingException e) {
             e.getStackTrace();
         }

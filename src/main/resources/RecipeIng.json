@@ -1,21 +1,22 @@
 [
   {
     "name": "жаренная картошка с луком",
+    "cookingTime": 5,
     "ingredients": [
       {
         "name": "картофель",
-        "weight": 500,
-        "measureUnti": "граммы"
+        "count": 500,
+        "unitOfMeasurement": "граммы"
       },
       {
         "name": "подсолнечное масло",
-        "weight": 2,
-        "measureUnti": "2 ст. л."
+        "count": 2,
+        "unitOfMeasurement": "2 ст. л."
       },
       {
         "name": "лук репчатый",
-        "weight": 100,
-        "measureUnti": "граммы"
+        "count": 100,
+        "unitOfMeasurement": "граммы"
       }
     ],
     "steps": {
@@ -28,21 +29,22 @@
   },
   {
     "name": "глазунья",
+    "cookingTime": 5,
     "ingredients": [
       {
         "name": "яйцо куриное",
         "weight": 3,
-        "measureUnti": "шт"
+        "unitOfMeasurement": "шт"
       },
       {
         "name": "подсолнечное масло",
         "weight": 2,
-        "measureUnti": "2 ст. л."
+        "unitOfMeasurement": "2 ст. л."
       },
       {
         "name": "соль/перец",
         "weight": 0,
-        "measureUnti": "по вкусу"
+        "unitOfMeasurement": "по вкусу"
       }
     ],
     "steps": {

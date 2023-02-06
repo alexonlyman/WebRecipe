@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import skypro.webrecipe.services.FileSirvice;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,43 +12,44 @@ import java.nio.file.Path;
 @Service
 public class FileServiceImpl implements FileSirvice {
     @Value("${pathToDataFile}")
-    private String dataFIlePath;
+    private String dataFilePath;
 
     @Value("${nameOfDataFile}")
-    private String dataFIleName;
+    private String dataFileName;
 
     @Override
-    public boolean saveToFile(String json) {
+    public void saveToFile(String json) {
 
         try {
             cleanDataFIle();
-            Files.writeString(Path.of(dataFIlePath, dataFIleName), json);
-            return true;
+            Files.writeString(Path.of(dataFilePath, dataFileName), json);
         } catch (IOException e) {
             e.getStackTrace();
-            return false;
         }
     }
 
     @Override
     public String readFromFile() {
         try {
-            return Files.readString(Path.of(dataFIlePath, dataFIleName));
+            return Files.readString(Path.of(dataFilePath, dataFileName));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
-    public boolean cleanDataFIle() {
+    public void cleanDataFIle() {
         try {
-            Files.deleteIfExists(Path.of(dataFIlePath, dataFIleName));
-            Files.createFile(Path.of(dataFIlePath, dataFIleName));
-            return true;
+            Files.deleteIfExists(Path.of(dataFilePath, dataFileName));
+            Files.createFile(Path.of(dataFilePath, dataFileName));
         } catch (IOException e) {
             e.getStackTrace();
-            return false;
         }
+    }
+    @Override
+    public File getDataFile() {
+
+        return new File(dataFilePath + "/" + dataFileName);
     }
 
 

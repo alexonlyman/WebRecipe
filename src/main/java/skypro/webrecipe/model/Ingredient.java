@@ -8,5 +8,5 @@ import lombok.NoArgsConstructor;
 public class Ingredient {
     private String name;
     private Integer count;
-    private int unitOfMeasurement;
+    private String unitOfMeasurement;
 }

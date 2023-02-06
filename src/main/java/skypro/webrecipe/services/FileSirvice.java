@@ -1,9 +1,13 @@
 package skypro.webrecipe.services;
 
+import java.io.File;
+
 public interface FileSirvice {
-    boolean saveToFile(String json);
+    void saveToFile(String json);
 
     String readFromFile();
 
-    boolean cleanDataFIle();
+    void cleanDataFIle();
+
+    File getDataFile();
 }
