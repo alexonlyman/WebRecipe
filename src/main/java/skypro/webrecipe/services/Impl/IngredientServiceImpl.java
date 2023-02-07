@@ -4,11 +4,15 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import skypro.webrecipe.model.Ingredient;
-import skypro.webrecipe.services.FileService;
 import skypro.webrecipe.services.IngredientService;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,9 +20,10 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class IngredientServiceImpl implements IngredientService {
-    private final FileService fileService;
+    private final IngredientDataService ingredientDataService;
     private Map<Integer, Ingredient> ingredientMap = new HashMap<>();
     private static Integer id = 0;
+
 
 
     @Override
@@ -62,22 +67,21 @@ public class IngredientServiceImpl implements IngredientService {
 
     private void saveToFile() {
         try {
-          String json = new ObjectMapper().writeValueAsString(ingredientMap);
-          fileService.saveToFile(json);
+            String json = new ObjectMapper().writeValueAsString(ingredientMap);
+            ingredientDataService.saveToFile(json);
         } catch (JsonProcessingException e) {
             e.getStackTrace();
         }
 
     }
 
-    private void readFromFile() {
-        String json = fileService.readFromFile();
-            try {
-                ingredientMap = new ObjectMapper().readValue(json, new TypeReference<HashMap<Integer, Ingredient>>() {
-
-                });
-            } catch (JsonProcessingException e) {
-                throw new RuntimeException(e);
-            }
+    private void readFile() {
+        String json = ingredientDataService.readFromFile();
+        try {
+            ingredientMap = new ObjectMapper().readValue(json, new TypeReference<HashMap<Integer, Ingredient>>() {
+            });
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
