@@ -5,21 +5,13 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import skypro.webrecipe.model.Ingredient;
 import skypro.webrecipe.model.Recipe;
-import skypro.webrecipe.services.FileSirvice;
-import skypro.webrecipe.services.IngredientService;
+import skypro.webrecipe.services.FileService;
 import skypro.webrecipe.services.RecipeServise;
 
 import javax.validation.Valid;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,7 +19,7 @@ import java.io.FileNotFoundException;
 @Tag(name = "Рецепты", description = "CRUD операции для работы с рецептами")
 public class RecipeController {
     private final RecipeServise recipeServise;
-    private final FileSirvice fileSirvice;
+    private final FileService fileService;
 
     @GetMapping("{id}")
     @Operation(

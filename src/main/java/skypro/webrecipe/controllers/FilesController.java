@@ -1,6 +1,5 @@
 package skypro.webrecipe.controllers;
 
-import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -9,16 +8,16 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import skypro.webrecipe.services.FileSirvice;
+import skypro.webrecipe.services.FileService;
 
 import java.io.*;
 
 @RestController
 @RequestMapping("/files")
 public class FilesController {
-    private final FileSirvice fileService;
+    private final FileService fileService;
 
-    public FilesController(FileSirvice fileService) {
+    public FilesController(FileService fileService) {
         this.fileService = fileService;
     }
     @GetMapping("/download")
@@ -48,8 +47,7 @@ public class FilesController {
             IOUtils.copy(file.getInputStream(), fos);
             return ResponseEntity.ok().build();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
 }

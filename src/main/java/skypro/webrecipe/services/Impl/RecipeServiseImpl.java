@@ -5,12 +5,10 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import skypro.webrecipe.model.Ingredient;
 import skypro.webrecipe.model.Recipe;
-import skypro.webrecipe.services.FileSirvice;
+import skypro.webrecipe.services.FileService;
 import skypro.webrecipe.services.RecipeServise;
 
-import javax.annotation.PostConstruct;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +16,7 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class RecipeServiseImpl implements RecipeServise {
-    private final FileSirvice fileSirvice;
+    private final FileService fileService;
     private Map<Integer, Recipe> recipeMap = new HashMap<>();
     private static Integer id = 0;
 
@@ -68,7 +66,7 @@ public class RecipeServiseImpl implements RecipeServise {
     private void saveToFile() {
         try {
             String json = new ObjectMapper().writeValueAsString(recipeMap);
-            fileSirvice.saveToFile(json);
+            fileService.saveToFile(json);
         } catch (JsonProcessingException e) {
             e.getStackTrace();
         }
@@ -76,7 +74,7 @@ public class RecipeServiseImpl implements RecipeServise {
     }
 
     private void readFromFile() {
-        String json = fileSirvice.readFromFile();
+        String json = fileService.readFromFile();
         try {
             recipeMap = new ObjectMapper().readValue(json, new TypeReference<HashMap<Integer, Recipe>>() {
 

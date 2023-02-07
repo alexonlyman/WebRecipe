@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import skypro.webrecipe.model.Ingredient;
-import skypro.webrecipe.services.FileSirvice;
+import skypro.webrecipe.services.FileService;
 import skypro.webrecipe.services.IngredientService;
 
 import java.util.Collection;
@@ -16,7 +16,7 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class IngredientServiceImpl implements IngredientService {
-    private final FileSirvice fileSirvice;
+    private final FileService fileService;
     private Map<Integer, Ingredient> ingredientMap = new HashMap<>();
     private static Integer id = 0;
 
@@ -63,7 +63,7 @@ public class IngredientServiceImpl implements IngredientService {
     private void saveToFile() {
         try {
           String json = new ObjectMapper().writeValueAsString(ingredientMap);
-          fileSirvice.saveToFile(json);
+          fileService.saveToFile(json);
         } catch (JsonProcessingException e) {
             e.getStackTrace();
         }
@@ -71,8 +71,7 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     private void readFromFile() {
-        String json = fileSirvice.readFromFile();
-        try {
+        String json = fileService.readFromFile();
             try {
                 ingredientMap = new ObjectMapper().readValue(json, new TypeReference<HashMap<Integer, Ingredient>>() {
 
@@ -80,8 +79,5 @@ public class IngredientServiceImpl implements IngredientService {
             } catch (JsonProcessingException e) {
                 throw new RuntimeException(e);
             }
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e);
-        }
     }
 }

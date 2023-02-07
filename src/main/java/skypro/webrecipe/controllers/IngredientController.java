@@ -39,9 +39,8 @@ public class IngredientController {
 
     @PostMapping
     public ResponseEntity<Ingredient> addIngredietn( @RequestBody Ingredient ingredient) {
-
-        Ingredient ingredietn = ingredientService.addIngredient(ingredient);
-        return ResponseEntity.ok().body(ingredietn);
+        ingredientService.addIngredient(ingredient);
+        return ResponseEntity.ok().body(ingredient);
     }
 
     @PutMapping("/{id}")
