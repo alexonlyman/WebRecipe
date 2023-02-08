@@ -13,6 +13,7 @@ import skypro.webrecipe.services.IngredientService;
 @RestController
 @RequestMapping("/ingredient")
 @RequiredArgsConstructor
+
 @Tag(name = "Ингредиенты", description = "CRUD операции для работы с ингредиентами")
 public class IngredientController {
     private final IngredientService ingredientService;
@@ -38,8 +39,7 @@ public class IngredientController {
 
     @PostMapping
     public ResponseEntity<Ingredient> addIngredietn( @RequestBody Ingredient ingredient) {
-
-        Ingredient ingredietn = ingredientService.addIngredient(ingredient);
+        ingredientService.addIngredient(ingredient);
         return ResponseEntity.ok().body(ingredient);
     }
 
