@@ -5,13 +5,19 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import skypro.webrecipe.model.Recipe;
-import skypro.webrecipe.services.FileService;
 import skypro.webrecipe.services.RecipeServise;
 
 import javax.validation.Valid;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,7 +25,6 @@ import javax.validation.Valid;
 @Tag(name = "Рецепты", description = "CRUD операции для работы с рецептами")
 public class RecipeController {
     private final RecipeServise recipeServise;
-    private final FileService fileService;
 
     @GetMapping("{id}")
     @Operation(
@@ -33,16 +38,6 @@ public class RecipeController {
         }
         return ResponseEntity.ok(recipe);
     }
-
-    @GetMapping
-    public ResponseEntity<Recipe> getAllRecipes() {
-        recipeServise.getAllRecipes();
-        return ResponseEntity.ok().build();
-    }
-
-
-
-
     @PostMapping
 
     public ResponseEntity<Recipe> addRecipe(@RequestBody Recipe recipe) {
