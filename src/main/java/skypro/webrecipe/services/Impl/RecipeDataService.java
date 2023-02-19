@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
 import skypro.webrecipe.model.Recipe;
-import skypro.webrecipe.services.FileService;
+import skypro.webrecipe.services.RecipeFileService;
 
 import javax.annotation.PostConstruct;
 import java.io.BufferedWriter;
@@ -18,7 +18,7 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
-public class RecipeDataService implements FileService {
+public class RecipeDataService implements RecipeFileService {
     @Value("${pathToDataFile}")
     private String dataFilePath;
 
@@ -33,7 +33,7 @@ public class RecipeDataService implements FileService {
     }
 
     @Override
-    public InputStreamResource createRecipeData(Map<Integer, Recipe> recipeMap) throws IOException {
+    public InputStreamResource createTxtData(Map<Integer, Recipe> recipeMap) throws IOException {
         Path path = this.createFile("allRecipeList");
         for (Recipe recipe : recipeMap.values())
             try (BufferedWriter writer = Files.newBufferedWriter(path, StandardOpenOption.APPEND)) {

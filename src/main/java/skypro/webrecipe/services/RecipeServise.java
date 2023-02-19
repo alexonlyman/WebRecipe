@@ -12,7 +12,7 @@ public interface RecipeServise {
     Recipe getRecipe(Integer id);
 
 
-    Map<Integer, Recipe> getRecipeMap();
+    Map<Integer, Recipe> getAllRecipes();
 
     Recipe editRecipe(Integer id, Recipe recipe);
 

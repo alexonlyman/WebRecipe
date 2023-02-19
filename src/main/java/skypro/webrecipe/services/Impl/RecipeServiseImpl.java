@@ -19,10 +19,6 @@ public class RecipeServiseImpl implements RecipeServise {
     private Map<Integer, Recipe> recipeMap = new HashMap<>();
     private static Integer id = 0;
 
-//    @PostConstruct
-//    private void init() {
-//        readFromFile();
-//    }
 
     @Override
     public Recipe addRecipe(Recipe recipe) {
@@ -35,27 +31,15 @@ public class RecipeServiseImpl implements RecipeServise {
         return recipeMap.get(id);
     }
 
+
     @Override
-    public Map<Integer, Recipe> getRecipeMap() {
+    public Map<Integer, Recipe> getAllRecipes() {
         Collection<Recipe> values = recipeMap.values();
         for (Recipe recipe : values) {
-            System.out.println("Список игредиентов " + recipe);
+            System.out.println("Список рецептов " + recipe);
         }
-        return null;
+        return recipeMap;
     }
-
-
-
-
-
-//    @Override
-//    public getAllRecipes() {
-//        Collection<Recipe> values = recipeMap.values();
-//        for (Recipe recipe : values) {
-//            System.out.println("Список рецептов " + recipe);
-//        }
-//
-//    }
 
     @Override
     public Recipe editRecipe(Integer id, Recipe recipe) {

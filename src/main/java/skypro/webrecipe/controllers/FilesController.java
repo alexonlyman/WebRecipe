@@ -25,8 +25,8 @@ public class FilesController {
 
 
     @GetMapping("/export/recipe")
-    public ResponseEntity<InputStreamResource> exportdData() throws IOException {
-        InputStreamResource inputStreamResource = recipeDataService.createRecipeData(recipeServise.getRecipeMap());
+    public ResponseEntity<InputStreamResource> exportData() throws IOException {
+        InputStreamResource inputStreamResource = recipeDataService.createTxtData(recipeServise.getAllRecipes());
         return ResponseEntity.ok()
                 .contentType(MediaType.TEXT_PLAIN)
                 .contentLength(Files.size(recipeDataService.getPath()))

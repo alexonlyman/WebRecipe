@@ -6,10 +6,13 @@ import org.springframework.stereotype.Service;
 import skypro.webrecipe.model.Recipe;
 import skypro.webrecipe.services.FileService;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.Map;
 
 @Service
@@ -20,16 +23,6 @@ public class IngredientDataService implements FileService {
     @Value("${nameOfDataIngredient}")
     private String dataFileName;
 
-
-    @Override
-    public InputStreamResource createRecipeData(Map<Integer, Recipe> recipeMap) throws IOException {
-        return null;
-    }
-
-    @Override
-    public Path createFile(String suffix) {
-        return null;
-    }
 
     @Override
     public void saveToFile(String json) {

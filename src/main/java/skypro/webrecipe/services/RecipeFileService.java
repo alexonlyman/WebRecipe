@@ -8,8 +8,10 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Map;
 
-public interface FileService {
+public interface RecipeFileService {
+    InputStreamResource createTxtData(Map<Integer, Recipe> recipeMap) throws IOException;
 
+    Path createFile(String suffix) throws IOException;
 
     void saveToFile(String json);
 
