@@ -1,13 +1,19 @@
 package skypro.webrecipe.services.Impl;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
+import skypro.webrecipe.model.Recipe;
 import skypro.webrecipe.services.FileService;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.util.Map;
 
 @Service
 public class IngredientDataService implements FileService {
@@ -16,6 +22,7 @@ public class IngredientDataService implements FileService {
 
     @Value("${nameOfDataIngredient}")
     private String dataFileName;
+
 
     @Override
     public void saveToFile(String json) {

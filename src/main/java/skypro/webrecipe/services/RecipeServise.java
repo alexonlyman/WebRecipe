@@ -2,7 +2,7 @@ package skypro.webrecipe.services;
 
 import skypro.webrecipe.model.Recipe;
 
-import java.io.File;
+import java.util.Map;
 
 public interface RecipeServise {
 
@@ -11,7 +11,8 @@ public interface RecipeServise {
 
     Recipe getRecipe(Integer id);
 
-    void getAllRecipes();
+
+    Map<Integer, Recipe> getAllRecipes();
 
     Recipe editRecipe(Integer id, Recipe recipe);
 

@@ -4,10 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import skypro.webrecipe.model.Recipe;
 import skypro.webrecipe.services.RecipeServise;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,10 +19,6 @@ public class RecipeServiseImpl implements RecipeServise {
     private Map<Integer, Recipe> recipeMap = new HashMap<>();
     private static Integer id = 0;
 
-//    @PostConstruct
-//    private void init() {
-//        readFromFile();
-//    }
 
     @Override
     public Recipe addRecipe(Recipe recipe) {
@@ -35,12 +31,14 @@ public class RecipeServiseImpl implements RecipeServise {
         return recipeMap.get(id);
     }
 
+
     @Override
-    public void getAllRecipes() {
+    public Map<Integer, Recipe> getAllRecipes() {
         Collection<Recipe> values = recipeMap.values();
         for (Recipe recipe : values) {
-            System.out.println("Список игредиентов " + recipe);
+            System.out.println("Список рецептов " + recipe);
         }
+        return recipeMap;
     }
 
     @Override
